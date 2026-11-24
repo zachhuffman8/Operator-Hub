@@ -1,6 +1,6 @@
 const SCOPE = self.registration.scope;
 const PREFIX = `operator-hub-shell:${SCOPE}:`;
-const CACHE = `${PREFIX}cbf8e106b4ecb558`;
+const CACHE = `${PREFIX}photos-update-20261124-v2`;
 const SHELL_URL = new URL('index.html', SCOPE).href;
 const PRECACHE = ["index.html","app.webmanifest","favicon.svg","apple-touch-icon.png","icon-192.png","icon-512.png","index-B9DDNbHm.css","index-DWAT14e3.js"].map(file => new URL(file, SCOPE).href);
 const STATIC_URLS = new Set(PRECACHE);
@@ -9,8 +9,7 @@ self.addEventListener('install', event => {
   event.waitUntil((async () => {
     const cache = await caches.open(CACHE);
     await cache.addAll(PRECACHE.map(url => new Request(url, { cache: 'reload' })));
-    // Let existing tabs finish with their matching app version. The first
-    // install activates immediately; updates activate once old tabs close.
+    await self.skipWaiting();
   })());
 });
 
